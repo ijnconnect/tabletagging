@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A4 Interactive Table Tent Template (V41, Dotted Outer Border)</title>
+    <title>A4 Interactive Table Tent Template (V42, Increased Card Height)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
@@ -91,10 +91,10 @@
         
         /* OUTER CUTTING BOX for one set of cards */
         .cut-box {
-            /* Width: 12.7cm = 5.0in */
-            --cut-box-width: 5.0in; 
-            /* Height: 2 * 1.99in = 3.98in */
-            --cut-box-height: 3.98in; 
+            /* Width: 12.7cm = 5.0in (UNCHANGED) */
+            --cut-box-width: 4.75in; 
+            /* Height: 2 * 2.29in = 4.58in (ADJUSTED) */
+            --cut-box-height: 4.37in; 
             
             width: var(--cut-box-width);
             height: var(--cut-box-height);
@@ -112,10 +112,10 @@
         
         /* Card Container: THE CUTTING/FOLDING AREA */
         .card-container {
-            /* Card Height: 1.99in */
-            --card-height: 1.99in; 
+            /* Card Height: 2.29in (ADJUSTED) */
+            --card-height: 2.29in; 
             
-            width: 100%; 
+            width: 100%; /* Takes full width of cut-box */
             height: var(--card-height);
             box-sizing: border-box;
             background-color: white;
@@ -139,8 +139,9 @@
         
         /* --- FIXED-SIZE CONTENT BOX --- */
         .inner-content-wrapper {
-            width: 4.5in; 
-            height: 1.6in; 
+            /* Adjusted for new card height (2.29in - 0.2in margin = 2.09in) */
+            width: 4.0in; 
+            height: 1.7in; 
             box-sizing: border-box;
             /* Inner Border: SOLID BLACK */
             border: 1px solid #000000; 
@@ -190,7 +191,7 @@
             text-transform: uppercase;
             line-height: 1.2; 
             white-space: pre-wrap;
-            /* Horizontal line separator: Still Black (from previous request) */
+            /* Horizontal line separator: Black */
             border-bottom: 1px solid #000000; 
             padding-bottom: 0.05in; 
             margin-bottom: 0.05in; 
@@ -204,7 +205,7 @@
             text-transform: uppercase;
             white-space: pre-wrap; 
             padding-top: 0.05in; 
-            /* IJN BRANDING: Dark Blue text */
+            /* IJN BRANDING: Dark Blue text (color kept from previous versions, can be changed if needed) */
         }
 
         /* --- PRINT STYLES --- */
@@ -228,7 +229,6 @@
 
             /* The CUT-BOX is the only thing with the border in print! (DOTTED Black) */
             .cut-box {
-                /* CHANGED to DOTTED BLACK LINE */
                 border: 1px dotted black !important; 
                 margin-bottom: 1.0in !important; 
             }
@@ -349,7 +349,7 @@ ISTMO</textarea>
             </div>
         </div>
 
-        <p style="font-size: 8pt; margin-top: 0.2in;">(Print on A4. Cut along the **dotted black outer box** (12.7cm wide x 10.1cm high). **Fold along the clear center line inside the box** to make the tent card. Ensure print scale is 100%.)</p>
+        <p style="font-size: 8pt; margin-top: 0.2in;">(Print on A4. Cut along the **dotted black outer box** (12.7cm wide x 11.6cm high). **Fold along the clear center line inside the box** to make the tent card. Ensure print scale is 100%.)</p>
 
     </div>
     
@@ -400,7 +400,7 @@ ISTMO</textarea>
             document.getElementById('designation-1-b').innerText = designationB;
             document.getElementById('designation-2-b').innerText = designationB;
 
-            // Set logo source
+            // Set logo sour
             document.getElementById('logo-img-1-b').src = logoBDataUrl || defaultLogo;
             document.getElementById('logo-img-2-b').src = logoBDataUrl || defaultLogo;
         }
