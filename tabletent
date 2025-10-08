@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4 Interactive Table Tent Template (V41, Dotted Outer Border)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE STYLES --- */
+        
+        body {
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Poppins', sans-serif;
+            color: #1a1a1a;
+            box-sizing: border-box;
+            background-color: #f7f7f7; 
+        }
+        
+        /* The input form area (hidden when printing) */
+        .input-form-area {
+            background-color: #e6f7ff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; 
+            justify-content: center;
+        }
+
+        .card-input-group {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border: 1px dashed #007bff;
+            gap: 5px;
+        }
+        
+        .input-group {
+            display: flex; 
+            flex-direction: column; 
+            margin-bottom: 5px;
+        }
+
+        .input-form-area label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 10pt;
+        }
+
+        .input-form-area input[type="text"], .input-form-area textarea {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            resize: vertical;
+        }
+
+        .action-buttons button {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .action-buttons button:nth-child(2) { 
+            background-color: #28a745; 
+        }
+
+        /* A4 Page Container */
+        .a4-page-template {
+            width: 8.27in; 
+            height: 11.69in; 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start; 
+            padding-top: 0.2in; 
+            margin: 0 auto; 
+            background-color: white; 
+            padding-left: 0.5in; /* Margin for card placement */
+        }
+        
+        /* OUTER CUTTING BOX for one set of cards */
+        .cut-box {
+            /* Width: 12.7cm = 5.0in */
+            --cut-box-width: 5.0in; 
+            /* Height: 2 * 1.99in = 3.98in */
+            --cut-box-height: 3.98in; 
+            
+            width: var(--cut-box-width);
+            height: var(--cut-box-height);
+            box-sizing: border-box;
+            
+            /* Visual border in browser (dashed) */
+            border: 1px dashed #555; 
+            
+            display: flex;
+            flex-direction: column;
+            
+            /* Large vertical separation between card sets */
+            margin-bottom: 1.0in; 
+        }
+        
+        /* Card Container: THE CUTTING/FOLDING AREA */
+        .card-container {
+            /* Card Height: 1.99in */
+            --card-height: 1.99in; 
+            
+            width: 100%; 
+            height: var(--card-height);
+            box-sizing: border-box;
+            background-color: white;
+            padding: 0; 
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            
+            /* Light grey dotted line for the fold area in the browser */
+            border-bottom: 1px dotted #aaaaaa;
+        }
+        
+        .cut-box > .card-container:last-child {
+            border-bottom: none; 
+        }
+
+        /* Rotated side is the TOP half on the printout */
+        .card-side-2 {
+            transform: rotate(180deg); 
+        }
+        
+        /* --- FIXED-SIZE CONTENT BOX --- */
+        .inner-content-wrapper {
+            width: 4.5in; 
+            height: 1.6in; 
+            box-sizing: border-box;
+            /* Inner Border: SOLID BLACK */
+            border: 1px solid #000000; 
+            border-radius: 6px; 
+            padding: 0.1in; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+        
+        /* --- LOGO BLOCK (LEFT SIDE - 35%) --- */
+        .logo-block {
+            font-weight: 700; 
+            width: 35%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-right: 0.1in; 
+            height: 100%; 
+        }
+
+        .logo {
+            /* Logo Size: 1.5in width and height */
+            max-width: 1.5in; 
+            max-height: 1.5in; 
+            width: auto;
+        }
+
+        /* --- CONTENT (NAME/DESIGNATION - RIGHT SIDE - 65%) --- */
+        .content-box {
+            width: 65%; 
+            display: flex;
+            flex-direction: column;
+            text-align: center; 
+            justify-content: center;
+            height: 100%;
+            padding-left: 0.1in; 
+        }
+
+        /* Name */
+        .name-wrapper {
+            font-size: 18px;
+            /* Name Font Weight: BOLD */
+            font-weight: 700; 
+            text-transform: uppercase;
+            line-height: 1.2; 
+            white-space: pre-wrap;
+            /* Horizontal line separator: Still Black (from previous request) */
+            border-bottom: 1px solid #000000; 
+            padding-bottom: 0.05in; 
+            margin-bottom: 0.05in; 
+        }
+
+        /* Designation */
+        .designation {
+            font-size: 11px;
+            font-weight: 400; 
+            line-height: 1.2; 
+            text-transform: uppercase;
+            white-space: pre-wrap; 
+            padding-top: 0.05in; 
+            /* IJN BRANDING: Dark Blue text */
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+            body {
+                background-color: white;
+            }
+            .input-form-area {
+                display: none; 
+            }
+            .a4-page-template {
+                padding: 0; 
+                margin: 0;
+                padding-left: 0.5in; 
+                padding-top: 0.5in;
+            }
+
+            /* The CUT-BOX is the only thing with the border in print! (DOTTED Black) */
+            .cut-box {
+                /* CHANGED to DOTTED BLACK LINE */
+                border: 1px dotted black !important; 
+                margin-bottom: 1.0in !important; 
+            }
+            
+            /* Remove the fold line border inside the cut-box in print */
+            .card-container {
+                border-bottom: none !important; 
+            }
+            
+            /* The inner border around the text box remains (Black) */
+            .inner-content-wrapper {
+                border: 1px solid #000000; 
+            }
+
+            /* Hide the cutting instructions in print */
+            .a4-page-template > p {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="input-form-area">
+        
+        <div class="card-input-group">
+            <h3>Card Set A (Top)</h3>
+            <div class="input-group">
+                <label for="p1-name">Name A:</label>
+                <input type="text" id="p1-name" value="PROF. DATO' SRI DR. ALWI MOHAMED YUNUS">
+            </div>
+            <div class="input-group">
+                <label for="p1-designation">Designation A:</label>
+                <textarea id="p1-designation">SENIOR CONSULTANT CARDIOTHORACIC
+SURGEON, CARDIOTHORACIC
+AND VASCULAR SURGERY</textarea>
+            </div>
+            <div class="input-group">
+                <label for="logo-file-a">Logo A (PNG/JPG):</label>
+                <input type="file" id="logo-file-a" accept="image/png, image/jpeg" onchange="previewLogo(event, 'a')">
+            </div>
+        </div>
+        
+        <div class="card-input-group">
+            <h3>Card Set B (Bottom)</h3>
+            <div class="input-group">
+                <label for="p2-name">Name B:</label>
+                <input type="text" id="p2-name" value="PN. ROHAYA SHAMSUDIN">
+            </div>
+            <div class="input-group">
+                <label for="p2-designation">Designation B:</label>
+                <textarea id="p2-designation">TRANSFORMATION MANAGER,
+ISTMO</textarea>
+            </div>
+            <div class="input-group">
+                <label for="logo-file-b">Logo B (PNG/JPG):</label>
+                <input type="file" id="logo-file-b" accept="image/png, image/jpeg" onchange="previewLogo(event, 'b')">
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button onclick="updateCard()">Update Card</button>
+            <button onclick="printA4()">Print Card</button>
+        </div>
+    </div>
+    
+    <div class="a4-page-template" id="a4-printable-area">
+        
+        <div class="cut-box" id="card-set-a-cut-box">
+            <div class="card-container card-side-2">
+                <div class="inner-content-wrapper">
+                    <div class="logo-block">
+                        <img class="logo" id="logo-img-2-a" alt="Logo">
+                    </div>
+                    <div class="content-box">
+                        <div class="name-wrapper" id="name-2-a"></div>
+                        <div class="designation" id="designation-2-a"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-container card-side-1">
+                <div class="inner-content-wrapper">
+                    <div class="logo-block">
+                        <img class="logo" id="logo-img-1-a" alt="Logo">
+                    </div>
+                    <div class="content-box">
+                        <div class="name-wrapper" id="name-1-a"></div>
+                        <div class="designation" id="designation-1-a"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cut-box" id="card-set-b-cut-box">
+            <div class="card-container card-side-2">
+                <div class="inner-content-wrapper">
+                    <div class="logo-block">
+                        <img class="logo" id="logo-img-2-b" alt="Logo">
+                    </div>
+                    <div class="content-box">
+                        <div class="name-wrapper" id="name-2-b"></div>
+                        <div class="designation" id="designation-2-b"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-container card-side-1">
+                <div class="inner-content-wrapper">
+                    <div class="logo-block">
+                        <img class="logo" id="logo-img-1-b" alt="Logo">
+                    </div>
+                    <div class="content-box">
+                        <div class="name-wrapper" id="name-1-b"></div>
+                        <div class="designation" id="designation-1-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 8pt; margin-top: 0.2in;">(Print on A4. Cut along the **dotted black outer box** (12.7cm wide x 10.1cm high). **Fold along the clear center line inside the box** to make the tent card. Ensure print scale is 100%.)</p>
+
+    </div>
+    
+    <script>
+        // Global variables to store logo data URLs
+        let logoADataUrl = '';
+        let logoBDataUrl = '';
+
+        function previewLogo(event, cardSet) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (cardSet === 'a') {
+                        logoADataUrl = e.target.result;
+                    } else if (cardSet === 'b') {
+                        logoBDataUrl = e.target.result;
+                    }
+                    updateCard(); 
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateCard() {
+            // --- CARD A UPDATES ---
+            const nameA = document.getElementById('p1-name').value.toUpperCase();
+            const designationA = document.getElementById('p1-designation').value.toUpperCase();
+            
+            document.getElementById('name-1-a').innerText = nameA;
+            document.getElementById('name-2-a').innerText = nameA;
+            document.getElementById('designation-1-a').innerText = designationA;
+            document.getElementById('designation-2-a').innerText = designationA;
+            
+            // Set logo source
+            const defaultLogo = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="transparent"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#999">Logo</text></svg>';
+            
+            document.getElementById('logo-img-1-a').src = logoADataUrl || defaultLogo;
+            document.getElementById('logo-img-2-a').src = logoADataUrl || defaultLogo;
+
+
+            // --- CARD B UPDATES ---
+            const nameB = document.getElementById('p2-name').value.toUpperCase();
+            const designationB = document.getElementById('p2-designation').value.toUpperCase();
+            
+            document.getElementById('name-1-b').innerText = nameB;
+            document.getElementById('name-2-b').innerText = nameB;
+            document.getElementById('designation-1-b').innerText = designationB;
+            document.getElementById('designation-2-b').innerText = designationB;
+
+            // Set logo source
+            document.getElementById('logo-img-1-b').src = logoBDataUrl || defaultLogo;
+            document.getElementById('logo-img-2-b').src = logoBDataUrl || defaultLogo;
+        }
+        
+        function printA4() {
+            const printContent = document.getElementById('a4-printable-area').outerHTML;
+            const printWindow = window.open('', '_blank', 'height=800,width=1000');
+            
+            printWindow.document.write('<!DOCTYPE html><html><head><title>Print Card</title>');
+            document.querySelectorAll('style, link[rel="stylesheet"]').forEach(node => {
+                printWindow.document.write(node.outerHTML);
+            });
+            
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(printContent);
+            printWindow.document.write('</body></html>');
+            
+            printWindow.document.close();
+            
+            printWindow.onload = function() {
+                printWindow.focus();
+                printWindow.print();
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCard);
+    </script>
+
+</body>
+</html>
